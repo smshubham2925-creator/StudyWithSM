@@ -1,0 +1,39 @@
+﻿@model IEnumerable<StudyWithMe.Models.StudyMaterial>
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white p-16 rounded-b-3xl text-center animate__animated animate__fadeIn">
+    <h1 class="text-5xl font-extrabold mb-4 animate__animated animate__fadeInDown">Welcome to StudyWithMe</h1>
+    <p class="text-xl mb-6 animate__animated animate__fadeInUp animate__delay-1s">
+        Explore & Add all your study materials in one magical place!
+    </p>
+    <a asp-controller="StudyMaterials" asp-action="Create"
+       class="bg-white text-purple-600 font-bold px-6 py-3 rounded-full shadow-lg hover:scale-105 transform transition animate__animated animate__pulse animate__infinite">
+        Add New Material
+    </a>
+</section>
+
+<!-- Study Materials Grid -->
+<section class="container mx-auto mt-12 p-6">
+    <h2 class="text-3xl font-bold mb-6 text-center text-indigo-600 animate__animated animate__fadeInDown">
+        All Study Materials
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @foreach (var item in Model)
+        {
+            <div class="bg-white rounded-2xl shadow-2xl p-6 transform transition duration-500 hover:scale-105 animate__animated animate__fadeInUp">
+                <h3 class="text-xl font-bold text-purple-600 mb-1">@item.Subject</h3>
+                <h4 class="text-lg font-semibold mb-2">@item.Topic</h4>
+                <p class="text-gray-700 mb-4">@item.Description</p>
+
+                @if (!string.IsNullOrEmpty(item.PdfUrl))
+                {
+                    <a href="@item.PdfUrl" target="_blank"
+                       class="inline-block bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-xl hover:scale-105 transform transition duration-300 animate__animated animate__pulse animate__infinite">
+                        View PDF
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</section>
